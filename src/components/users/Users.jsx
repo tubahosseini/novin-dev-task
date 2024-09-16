@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { Delete, Edit, Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../api";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -28,13 +29,13 @@ const Users = () => {
 
   const fetchUsers = async (currentPage) => {
     try {
-      const response = await axios.get(`https://reqres.in/api/users`, {
+      const response = await axios.get(`${BASE_URL}/api/users`, {
         params: { page: currentPage },
       });
       setUsers(response.data.data);
       setTotalUsers(response.data.total);
     } catch (error) {
-      console.error("error is", error);
+      console.error("Error fetching users:", error);
     }
   };
 

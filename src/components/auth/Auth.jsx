@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { TextField, Button, Paper, Typography, Box } from '@mui/material';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { TextField, Button, Paper, Typography, Box } from "@mui/material";
+import { BASE_URL } from "../../api";
 
 const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    setError('');
+    setError("");
     try {
-      const response = await axios.post('https://reqres.in/api/login', {
+      const response = await axios.post(`${BASE_URL}/api/login`, {
         email,
         password,
       });
 
       if (response.status === 200) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-        navigate('/users');
+        localStorage.setItem("user", JSON.stringify(response.data));
+        navigate("/users");
       }
     } catch (error) {
-      setError('try again!');
+      setError("try again!");
     }
   };
 
@@ -33,7 +34,7 @@ const Auth = () => {
       alignItems="center"
       minHeight="100vh"
     >
-      <Paper style={{ padding: 30, width: '300px' }}>
+      <Paper style={{ padding: 30, width: "300px" }}>
         <Typography variant="h5" align="center">
           Login
         </Typography>
